@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Bowl - Welcome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="top-bar">
+        <div class="logo">LOGO</div>
+        <div class="title">QUIZ BOWL</div>
+      </header>
+
+      <main class="content">
+        <section class="welcome-card" data-screen="welcome">
+          <h1>WELCOME</h1>
+          <form class="join-form" aria-label="Join quiz bowl">
+            <label class="field">
+              <span>ENTER NAME</span>
+              <input type="text" name="teamName" placeholder="Your team" required />
+            </label>
+            <label class="field">
+              <span>ENTER CODE</span>
+              <input
+                type="text"
+                name="roomCode"
+                placeholder="QZ-7HK"
+                maxlength="6"
+                required
+              />
+            </label>
+            <button type="submit">JOIN</button>
+            <p class="helper" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="lobby-card is-hidden" data-screen="lobby">
+          <div class="lobby-header">
+            <h1>WAITING FOR HOST TO START...</h1>
+            <h2>PARTICIPANTS</h2>
+          </div>
+          <div class="participants">
+            <div class="participants-row participants-head">
+              <span>TEAM</span>
+              <span>STATUS</span>
+            </div>
+            <div class="participants-row">
+              <span id="team-name">YOUR TEAM</span>
+              <span id="team-status">UNREADY</span>
+            </div>
+            <div class="participants-row">
+              <span>GROUP 1</span>
+              <span>READY</span>
+            </div>
+            <div class="participants-row">
+              <span>GROUP 2</span>
+              <span></span>
+            </div>
+            <div class="participants-row">
+              <span>GROUP 3</span>
+              <span>READY</span>
+            </div>
+            <div class="participants-row">
+              <span>GROUP 4</span>
+              <span>READY</span>
+            </div>
+            <div class="participants-row">
+              <span>GROUP 5</span>
+              <span></span>
+            </div>
+            <div class="participants-row">
+              <span>GROUP 6</span>
+              <span>READY</span>
+            </div>
+          </div>
+          <button class="ready-toggle" type="button">UNREADY</button>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const form = document.querySelector(".join-form");
+      const helper = document.querySelector(".helper");
+      const welcomeScreen = document.querySelector("[data-screen='welcome']");
+      const lobbyScreen = document.querySelector("[data-screen='lobby']");
+      const teamNameDisplay = document.querySelector("#team-name");
+      const teamStatusDisplay = document.querySelector("#team-status");
+      const readyToggle = document.querySelector(".ready-toggle");
+      const allowedCode = "QZ-7HK";
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const teamName = String(formData.get("teamName") || "").trim();
+        const code = String(formData.get("roomCode") || "")
+          .trim()
+          .toUpperCase();
+        if (code !== allowedCode) {
+          helper.textContent = "Invalid code. Please use QZ-7HK.";
+          return;
+        }
+        helper.textContent = "Code accepted. Welcome to Quiz Bowl!";
+        teamNameDisplay.textContent = teamName || "YOUR TEAM";
+        welcomeScreen.classList.add("is-hidden");
+        lobbyScreen.classList.remove("is-hidden");
+      });
+
+      readyToggle.addEventListener("click", () => {
+        const isReady = teamStatusDisplay.textContent === "READY";
+        teamStatusDisplay.textContent = isReady ? "UNREADY" : "READY";
+        readyToggle.textContent = isReady ? "UNREADY" : "READY";
+      });
+    </script>
+  </body>
+</html>
