@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const path = require("path");
 
 app.use(
   cors({
@@ -10,6 +11,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 const rooms = {};
 const ROOM_CODE_LENGTH = 6;
