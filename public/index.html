@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Bowl - Welcome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="top-bar">
+        <div class="logo">LOGO</div>
+        <div class="title">QUIZ BOWL</div>
+      </header>
+
+      <main class="content">
+        <section class="welcome-card">
+          <h1>WELCOME</h1>
+          <form class="join-form" aria-label="Join quiz bowl">
+            <label class="field">
+              <span>ENTER NAME</span>
+              <input type="text" name="teamName" placeholder="Your team" required />
+            </label>
+            <label class="field">
+              <span>ENTER CODE</span>
+              <input
+                type="text"
+                name="roomCode"
+                placeholder="QZ-7HK"
+                maxlength="6"
+                required
+              />
+            </label>
+            <button type="submit">JOIN</button>
+            <p class="helper" aria-live="polite"></p>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const form = document.querySelector(".join-form");
+      const helper = document.querySelector(".helper");
+      const allowedCode = "QZ-7HK";
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const code = String(formData.get("roomCode") || "")
+          .trim()
+          .toUpperCase();
+        if (code !== allowedCode) {
+          helper.textContent = "Invalid code. Please use QZ-7HK.";
+          return;
+        }
+        helper.textContent = "Code accepted. Welcome to Quiz Bowl!";
+      });
+    </script>
+  </body>
+</html>
