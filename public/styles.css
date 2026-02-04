@@ -39,6 +39,25 @@ body {
   font-size: 20px;
 }
 
+.question-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+}
+
+.question-header .logo {
+  justify-self: start;
+}
+
+.question-header .room-code {
+  justify-self: center;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+}
+
+.question-header .title {
+  justify-self: end;
+}
+
 .logo {
   font-size: 32px;
   font-weight: 700;
@@ -220,19 +239,6 @@ button:hover {
   background: var(--panel);
   display: grid;
   gap: 16px;
-}
-
-.question-top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 2px solid var(--border);
-  padding: 8px 16px;
-}
-
-.room-code {
-  letter-spacing: 0.1em;
-  font-size: 18px;
 }
 
 .question-meta {

@@ -152,9 +152,16 @@ const App = () => {
 
   return (
     <div className="page">
-      <header className="top-bar">
+      <header className={`top-bar${phase === "question" ? " question-header" : ""}`}>
         <div className="logo">LOGO</div>
-        <div className="title">QUIZ BOWL</div>
+        {phase === "question" ? (
+          <>
+            <div className="room-code">ROOM {room || ALLOWED_CODE}</div>
+            <div className="title">QUIZ BOWL</div>
+          </>
+        ) : (
+          <div className="title">QUIZ BOWL</div>
+        )}
       </header>
 
       <main className="content">
@@ -224,10 +231,6 @@ const App = () => {
           </section>
         ) : phase === "question" ? (
           <section className="question-board">
-            <div className="question-top-bar">
-              <div className="logo">LOGO</div>
-              <div className="room-code">ROOM {room || ALLOWED_CODE}</div>
-            </div>
             <div className="question-meta">
               <span>QUIZ BOWL</span>
               <span>TIME REMAINING {formatTime(timeRemaining)}</span>
