@@ -233,7 +233,7 @@ button:hover {
 }
 
 .question-board {
-  width: min(860px, 92vw);
+  width: min(980px, 94vw);
   border: 2px solid var(--border);
   padding: 18px 22px 20px;
   background: var(--panel);
@@ -260,7 +260,7 @@ button:hover {
 .answer-panel {
   border: 2px solid var(--border);
   padding: 16px;
-  min-height: 260px;
+  min-height: 320px;
   display: grid;
   gap: 12px;
 }
@@ -278,7 +278,7 @@ button:hover {
 
 .answers {
   display: grid;
-  gap: 12px;
+  gap: 16px;
 }
 
 .answer-option {
