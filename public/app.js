@@ -93,6 +93,25 @@ const App = () => {
     return () => window.clearTimeout(timer);
   }, [phase, round, timeRemaining]);
 
+  useEffect(() => {
+    if (phase !== "reveal") {
+      return undefined;
+    }
+    const timer = window.setTimeout(() => {
+      const nextIndex = questionIndex + 1;
+      if (round?.questions?.[nextIndex]) {
+        setQuestionIndex(nextIndex);
+        setTimeRemaining(round.timeLimitSeconds || 15);
+        setSelectedAnswer("");
+        setRevealAnswer(false);
+        setPhase("question");
+      } else {
+        setPhase("complete");
+      }
+    }, 2500);
+    return () => window.clearTimeout(timer);
+  }, [phase, questionIndex, round]);
+
   const handleJoin = (event) => {
     event.preventDefault();
     const normalizedCode = roomCode.trim().toUpperCase();
@@ -244,12 +263,20 @@ const App = () => {
               <span>[QUESTION] {String(questionIndex + 1).padStart(2, "0")}/10</span>
             </div>
           </section>
-        ) : (
+        ) : phase === "reveal" ? (
           <section className="answer-reveal">
             <p className="round-label">CORRECT ANSWER</p>
             <div className="round-card">
               <h1>CORRECT ANSWER</h1>
               <p>{currentQuestion?.answer ? `${currentQuestion.answer}. ${currentQuestion.options?.[currentQuestion.answer.charCodeAt(0) - 65] || ""}` : ""}</p>
+            </div>
+          </section>
+        ) : (
+          <section className="round-intro">
+            <p className="round-label">ROUND COMPLETE</p>
+            <div className="round-card">
+              <h1>EASY ROUND COMPLETE</h1>
+              <p>WAITING FOR THE NEXT ROUND...</p>
             </div>
           </section>
         )}
