@@ -289,6 +289,8 @@ button:hover {
   padding: 10px 12px;
   font-size: 18px;
   letter-spacing: 0.08em;
+  line-height: 1.3;
+  white-space: normal;
 }
 
 .answer-option.is-selected {
@@ -302,4 +304,76 @@ button:hover {
   font-size: 12px;
   letter-spacing: 0.12em;
   color: rgba(227, 246, 236, 0.6);
+}
+
+@media (max-width: 900px) {
+  .page {
+    margin: 12px;
+    padding: 10px 12px 28px;
+  }
+
+  .top-bar {
+    font-size: 16px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .question-board {
+    width: min(960px, 96vw);
+  }
+}
+
+@media (max-width: 720px) {
+  .question-header {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .question-header .logo,
+  .question-header .room-code,
+  .question-header .title {
+    justify-self: center;
+  }
+
+  .question-body {
+    grid-template-columns: 1fr;
+  }
+
+  .question-panel,
+  .answer-panel {
+    min-height: 200px;
+  }
+
+  .answer-option {
+    font-size: 16px;
+  }
+
+  .question-footer {
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .question-board {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .question-panel p {
+    font-size: 18px;
+  }
+
+  .answer-option {
+    font-size: 15px;
+    padding: 10px;
+  }
 }
